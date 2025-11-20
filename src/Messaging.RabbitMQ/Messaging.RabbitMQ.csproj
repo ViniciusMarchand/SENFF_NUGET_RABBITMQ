@@ -4,6 +4,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>SenffTest.Messaging.RabbitMQ</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>ViniciusMarchand</Authors>
+    <Company>ViniciusMarchand</Company>
+    <Description>Message library with RabbitMQ.</Description>
+    <PackageTags>rabbitmq messaging queue</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
