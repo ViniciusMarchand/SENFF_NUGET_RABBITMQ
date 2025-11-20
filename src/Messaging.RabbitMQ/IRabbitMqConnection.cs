@@ -1,6 +1,6 @@
 using RabbitMQ.Client;
 
-namespace Senff_test.Messaging.RabbitMQ;
+namespace SenffTest.Messaging.RabbitMQ;
 
 public interface IRabbitMqConnection
 {

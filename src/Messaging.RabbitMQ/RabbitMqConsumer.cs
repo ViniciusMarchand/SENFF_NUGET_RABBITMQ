@@ -2,9 +2,9 @@ using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Senff_test.Messaging.Abstractions;
+using SenffTest.Messaging.Abstractions;
 
-namespace Senff_test.Messaging.RabbitMQ;
+namespace SenffTest.Messaging.RabbitMQ;
 
 public class RabbitMqConsumer(IRabbitMqConnection conn) : IMessageConsumer
 {

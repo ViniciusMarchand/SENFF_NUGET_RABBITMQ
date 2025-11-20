@@ -1,4 +1,4 @@
-namespace Senff_test.Messaging.RabbitMQ;
+namespace SenffTest.Messaging.RabbitMQ;
 
 public class RabbitMqConfig
 {
