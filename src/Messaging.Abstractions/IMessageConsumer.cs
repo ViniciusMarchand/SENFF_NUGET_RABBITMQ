@@ -1,4 +1,4 @@
-namespace Senff_test.Messaging.Abstractions;
+namespace SenffTest.Messaging.Abstractions;
 
 public interface IMessageConsumer
 {
