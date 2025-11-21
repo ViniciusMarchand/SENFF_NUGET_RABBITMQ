@@ -1,0 +1,8 @@
+using WebApp.DTOs;
+
+namespace WebApp.Services.Interfaces;
+
+public interface INoteService
+{
+    Task SendNote(Note note);
+}
