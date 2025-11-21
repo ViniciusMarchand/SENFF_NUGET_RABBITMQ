@@ -4,6 +4,9 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>/README.md</PackageReadmeFile>
+    <IncludeContentInPack>true</IncludeContentInPack>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SenffTest.Messaging.RabbitMQ.Abstraction</PackageId>
@@ -13,4 +16,8 @@
     <Description>Message library with RabbitMQ (asbtraction).</Description>
     <PackageTags>rabbitmq messaging queue</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" pack="true" PackagePath="." />
+  </ItemGroup>
 </Project>

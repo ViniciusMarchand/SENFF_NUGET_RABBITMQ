@@ -4,6 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>/README.md</PackageReadmeFile>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <RepositoryUrl>https://github.com/ViniciusMarchand/SENFF_NUGET_RABBITMQ</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SenffTest.Messaging.RabbitMQ</PackageId>
@@ -15,8 +21,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messaging.Abstractions\Messaging.Abstractions.csproj" />
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+    <PackageReference Include="SenffTest.Messaging.RabbitMQ.Abstraction" Version="1.0.0" />
+    <None Include="README.md" pack="true" PackagePath="." />
   </ItemGroup>
 
 </Project>
