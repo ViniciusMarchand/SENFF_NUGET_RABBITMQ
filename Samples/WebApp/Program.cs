@@ -8,6 +8,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<INoteService, NoteService>();
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
+builder.Services.AddSingleton<IListenerService, RabbitMQListener>();
 
 builder.Services.AddControllers();
 
