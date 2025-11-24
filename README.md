@@ -1,7 +1,5 @@
 # **SenffTest.Messaging (RabbitMQ)**
 
-# SenffTest.Messaging.RabbitMQ
-
 Biblioteca de mensageria em .NET baseada em **RabbitMQ**, oferecendo uma implementação simples, resiliente e desacoplada de Publisher/Consumer.
 
 A solução contém:
