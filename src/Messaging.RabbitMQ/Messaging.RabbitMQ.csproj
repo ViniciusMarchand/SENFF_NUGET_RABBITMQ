@@ -13,7 +13,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SenffTest.Messaging.RabbitMQ</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.5</Version>
     <Authors>ViniciusMarchand</Authors>
     <Company>ViniciusMarchand</Company>
     <Description>Message library with RabbitMQ.</Description>
