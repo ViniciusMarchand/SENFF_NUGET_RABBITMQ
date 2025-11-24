@@ -60,7 +60,7 @@ public class NoteService(IRabbitMQService rabbitService) : INoteService
     private static async Task SetRabbitPermission(bool allowWrite)
     {
         var client = new HttpClient();
-        var url = "http://localhost:15672/api/permissions/%2F/guest";
+        var url = "http://host.docker.internal:15672/api/permissions/%2F/guest";
 
         var body = new
         {
