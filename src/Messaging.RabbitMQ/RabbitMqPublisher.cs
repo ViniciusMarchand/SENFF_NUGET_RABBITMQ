@@ -9,8 +9,8 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
 {
     private readonly IRabbitMqConnection _conn;
 
-    private readonly IConnection _connection;
-    private readonly IModel _channel;
+    private IConnection _connection;
+    private IModel _channel;
 
     public RabbitMqPublisher(IRabbitMqConnection conn)
     {
@@ -28,7 +28,6 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
         {
             try
             {
-                // 🔥 Declara fila uma vez (idempotente)
                 _channel.QueueDeclare(
                     queue: queue,
                     durable: true,
@@ -37,7 +36,6 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
                     arguments: null
                 );
 
-                // 🔥 Publicação instantânea
                 _channel.BasicPublish(
                     exchange: "",
                     routingKey: queue,
@@ -45,17 +43,26 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
                     body: body
                 );
 
-                Console.WriteLine($"[PUBLISH] Mensagem enviada para '{queue}': {JsonSerializer.Serialize(message)}");
                 return Task.CompletedTask;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[PUBLISH] Falha tentativa {attempt}/{retryCount}: {ex.Message}");
 
+                try
+                {
+                    _channel?.Dispose();
+                    _connection?.Dispose();
+                }
+                catch { }
+
+                _connection = _conn.CreateConnection();
+                _channel = _connection.CreateModel();
+
                 if (attempt == retryCount)
                     throw;
 
-                Thread.Sleep(200 * attempt);
+                Thread.Sleep(300 * attempt);
             }
         }
 
@@ -64,7 +71,7 @@ public class RabbitMqPublisher : IMessagePublisher, IDisposable
 
     public void Dispose()
     {
-        try { _channel?.Close(); } catch {}
-        try { _connection?.Close(); } catch {}
+        try { _channel?.Close(); } catch { }
+        try { _connection?.Close(); } catch { }
     }
 }
