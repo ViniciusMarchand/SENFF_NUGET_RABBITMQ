@@ -24,7 +24,6 @@ public class RabbitMqConnection : IRabbitMqConnection
         {
             try
             {
-                Console.WriteLine($"Tentando conectar ao RabbitMQ... tentativa {attempts + 1}");
                 return _factory.CreateConnection();
             }
             catch (Exception ex)
