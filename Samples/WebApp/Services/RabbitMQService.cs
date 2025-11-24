@@ -20,16 +20,16 @@ public class RabbitMQService : IRabbitMQService
         _consumer = new RabbitMqConsumer(_rabbitMqConnection);
     }
 
-    public async Task SendMessage<T>(string queue, T message)
+    public async Task SendMessage<T>(string queue, T message, int retryCount = 3)
     {
-        await _publisher.PublishAsync(queue, message);
+        await _publisher.PublishAsync(queue, message, retryCount);
     }
 
-    public void StartConsumer<T>(string queue, Func<T, Task> onMessage)
+    public void StartConsumer<T>(string queue, Func<T, Task> onMessage, int retryCount = 3)
     {
         _consumer.Consume<T>(queue, async msg =>
         {
             await onMessage(msg);
-        });
+        }, retryCount);
     }
 }
