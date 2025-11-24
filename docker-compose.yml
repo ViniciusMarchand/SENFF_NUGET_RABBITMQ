@@ -1,0 +1,39 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - messaging-net
+
+  sampleapp:
+    build:
+      context: Samples/WebApp
+      dockerfile: Dockerfile
+    ports:
+      - "5117:80"
+    volumes:
+      - ./Samples/WebApp:/src
+      - /src/bin
+      - /src/obj
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - messaging-net
+
+networks:
+  messaging-net:

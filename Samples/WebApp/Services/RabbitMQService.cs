@@ -15,7 +15,7 @@ public class RabbitMQService : IRabbitMQService
 
     public RabbitMQService()
     {
-        _rabbitMqConnection = new RabbitMqConnection("localhost", "guest", "guest");
+        _rabbitMqConnection = new RabbitMqConnection("host.docker.internal", "guest", "guest");
         _publisher = new RabbitMqPublisher(_rabbitMqConnection);
         _consumer = new RabbitMqConsumer(_rabbitMqConnection);
     }
