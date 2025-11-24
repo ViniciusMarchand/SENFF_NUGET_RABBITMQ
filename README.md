@@ -103,39 +103,6 @@ O repositório também inclui um **projeto WebAPI completo** demonstrando:
 
 Este exemplo é totalmente funcional e pode ser usado como referência de integração real, nele existe um único endpoint que printa no console a mensagem enviada através da utilização do RabbitMQ.
 
----
-
-# 🧪 Testes Unitários
-
-A pasta `Tests/` contém testes unitários cobrindo:
-
-* Publicação de mensagens
-* Retry
-* Criação de canais
-* Mock de IRabbitMqConnection
-* Consumo com ack/nack
-
-Exemplo:
-
-```csharp
-[Fact]
-public void Publisher_Deve_Publicar_Sem_Erros()
-{
-    var mockConn = new Mock<IRabbitMqConnection>();
-    var mockModel = new Mock<IModel>();
-    var mockConnection = new Mock<IConnection>();
-
-    mockConn.Setup(c => c.CreateConnection()).Returns(mockConnection.Object);
-    mockConnection.Setup(c => c.CreateModel()).Returns(mockModel.Object);
-
-    var publisher = new RabbitMqPublisher(mockConn.Object);
-    var data = new { Nome = "Teste" };
-
-    var task = publisher.PublishAsync("queue", data);
-
-    Assert.True(task.IsCompletedSuccessfully);
-}
-```
 
 ---
 
