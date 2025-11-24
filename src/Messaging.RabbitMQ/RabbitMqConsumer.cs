@@ -12,43 +12,73 @@ public class RabbitMqConsumer(IRabbitMqConnection conn) : IMessageConsumer
 
     public void Consume<T>(string queue, Func<T, Task> handler, int retryCount = 3)
     {
-        var connection = _conn.CreateConnection();
-        var channel = connection.CreateModel();
-
-        channel.QueueDeclare(queue, true, false, false);
-
-        var consumer = new AsyncEventingBasicConsumer(channel);
-
-        consumer.Received += async (sender, args) =>
+        _ = Task.Run(async () =>
         {
-            string json = Encoding.UTF8.GetString(args.Body.ToArray());
-            T? message = JsonSerializer.Deserialize<T>(json);
-
-            int attempts = 0;
-
             while (true)
             {
+                IConnection? connection = null;
+                IModel? channel = null;
+
                 try
                 {
-                    await handler(message!);
-                    channel.BasicAck(args.DeliveryTag, false);
-                    break;
-                }
-                catch
-                {
-                    attempts++;
+                    connection = _conn.CreateConnection();
+                    channel = connection.CreateModel();
 
-                    if (attempts > retryCount)
+                    channel.QueueDeclare(queue, durable: true, exclusive: false, autoDelete: false);
+
+                    var consumer = new AsyncEventingBasicConsumer(channel);
+
+                    consumer.Received += async (_, args) =>
                     {
-                        channel.BasicNack(args.DeliveryTag, false, false);
-                        break;
+                        T? message = JsonSerializer.Deserialize<T>(args.Body.ToArray());
+
+                        int attempts = 0;
+
+                        while (true)
+                        {
+                            try
+                            {
+                                await handler(message!);
+                                channel.BasicAck(args.DeliveryTag, false);
+                                break;
+                            }
+                            catch
+                            {
+                                attempts++;
+
+                                if (attempts > retryCount)
+                                {
+                                    channel.BasicNack(args.DeliveryTag, false, false);
+                                    break;
+                                }
+
+                                await Task.Delay(500 * attempts);
+                            }
+                        }
+                    };
+
+                    channel.BasicConsume(queue, autoAck: false, consumer);
+
+
+                    while (connection.IsOpen && channel.IsOpen)
+                    {
+                        await Task.Delay(500);
                     }
 
-                    await Task.Delay(500 * attempts);
+                    Console.WriteLine("[CONSUMER] Canal ou conexão fechados. Tentando reconectar...");
                 }
-            }
-        };
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[CONSUMER] Falha ao conectar/consumir: {ex.Message}");
+                }
+                finally
+                {
+                    try { channel?.Close(); } catch {}
+                    try { connection?.Close(); } catch {}
+                }
 
-        channel.BasicConsume(queue, false, consumer);
+                await Task.Delay(2000);
+            }
+        });
     }
 }
