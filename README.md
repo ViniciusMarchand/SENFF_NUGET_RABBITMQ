@@ -103,12 +103,13 @@ O repositório também inclui um **projeto WebAPI completo** demonstrando:
 
 Este exemplo é totalmente funcional e pode ser usado como referência de integração real, nele existe um único endpoint que printa no console a mensagem enviada através da utilização do RabbitMQ.
 
-Esse aplicativo web possui 3 endpoints para teste:
+# 🧪 Endpoints de Teste
 
-/message (envia e recebe mensagens mostrando o resultado no terminal)
-/message/test-retry-publisher (cancela permissões e tenta enviar mensagem até a permissão ser liberada de novo ou até alcançar o números de tentativas passadas pelo body)
-/message/test-retry-consumer (memsa coisa que o de cima mas para o consumer)
-
+| Endpoint | Descrição |
+|----------|-----------|
+| **`POST /message`** | Envia e recebe mensagens mostrando o resultado no terminal |
+| **`POST /message/test-retry-publisher`** | Testa retry no publisher até liberar permissões ou atingir tentativas máximas |
+| **`POST /message/test-retry-consumer`** | Testa retry no consumer até liberar permissões ou atingir tentativas máximas |
 
 
 
