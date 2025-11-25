@@ -13,7 +13,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SenffTest.Messaging.RabbitMQ</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.2.1</Version>
     <Authors>ViniciusMarchand</Authors>
     <Company>ViniciusMarchand</Company>
     <Description>Message library with RabbitMQ.</Description>
@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
-    <PackageReference Include="SenffTest.Messaging.RabbitMQ.Abstraction" Version="1.0.0" />
+    <PackageReference Include="SenffTest.Messaging.RabbitMQ.Abstraction" Version="1.2.0" />
     <None Include="README.md" pack="true" PackagePath="." />
   </ItemGroup>
 
