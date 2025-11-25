@@ -99,9 +99,17 @@ O repositório também inclui um **projeto WebAPI completo** demonstrando:
 
 📍 O WebApp pode ser acessado em:
 
-### 👉 [http://localhost:5117/swagger/index.html](http://localhost:5117/swagger/index.html)
+## 👉 [http://localhost:5117/swagger/index.html](http://localhost:5117/swagger/index.html)
 
 Este exemplo é totalmente funcional e pode ser usado como referência de integração real, nele existe um único endpoint que printa no console a mensagem enviada através da utilização do RabbitMQ.
+
+Esse aplicativo web possui 3 endpoints para teste:
+
+/message (envia e recebe mensagens mostrando o resultado no terminal)
+/message/test-retry-publisher (cancela permissões e tenta enviar mensagem até a permissão ser liberada de novo ou até alcançar o números de tentativas passadas pelo body)
+/message/test-retry-consumer (memsa coisa que o de cima mas para o consumer)
+
+
 
 
 ---
