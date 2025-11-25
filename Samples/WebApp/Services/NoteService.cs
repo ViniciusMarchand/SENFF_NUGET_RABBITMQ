@@ -36,7 +36,7 @@ public class NoteService(IRabbitMQService rabbitService) : INoteService
         }
     }
 
-    public async Task     TestRetryConsumer(TestRetryRequest dto)
+    public async Task TestRetryConsumer(TestRetryRequest dto)
     {
         Console.WriteLine("Bloqueando permissão...");
         await SetRabbitPermission(false);
