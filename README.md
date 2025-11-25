@@ -89,6 +89,22 @@ Console.ReadKey();
 
 ---
 
+# RabbitMqPublisher (Interface) 
+```csharp
+public interface IMessagePublisher
+{
+    Task PublishAsync<T>(string queue, T message, int retryCount = 3);
+    Task PublishAsync<T>(string queue, T message, PublishOptions options, int retryCount = 3);
+}
+```
+# RabbitMqConsumer (Interface) 
+```csharp
+public interface IMessageConsumer
+{
+    void Consume<T>(string queue, Func<T, Task> handler, int retryCount = 3);
+    void Consume<T>(string queue, Func<T, Task> handler, QueueOptions options, int retryCount = 3);
+}
+```
 # 🧱 Exemplo completo (Samples/WebApp)
 
 O repositório também inclui um **projeto WebAPI completo** demonstrando:
