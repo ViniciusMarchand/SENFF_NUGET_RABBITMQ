@@ -117,7 +117,7 @@ O repositório também inclui um **projeto WebAPI completo** demonstrando:
 
 ## 👉 [http://localhost:5117/swagger/index.html](http://localhost:5117/swagger/index.html)
 
-Este exemplo é totalmente funcional e pode ser usado como referência de integração real, nele existe um único endpoint que printa no console a mensagem enviada através da utilização do RabbitMQ.
+Este exemplo é totalmente funcional e pode ser usado como referência de integração real, nele existem endpoints que printam no console as mensagens enviadas através da utilização do RabbitMQ.
 
 # 🧪 Endpoints de Teste
 
