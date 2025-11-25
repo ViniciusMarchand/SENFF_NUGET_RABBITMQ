@@ -4,8 +4,8 @@ Biblioteca de mensageria em .NET baseada em **RabbitMQ**, oferecendo uma impleme
 
 A solução contém:
 
-* **SenffTest.Messaging.RabbitMQ.Abstraction** → Interfaces
-* **SenffTest.Messaging.RabbitMQ** → Implementação RabbitMQ
+* **src/Messaging.RabbitMQ.Abstraction** → Interfaces
+* **src/Messaging.RabbitMQ** → Implementação RabbitMQ
 * **Samples/App** → Exemplo console mínimo
 * **Samples/WebApp** → Exemplo completo de uso real (API Web)
 * **Tests** → Testes unitários
